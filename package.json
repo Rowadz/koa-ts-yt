@@ -1,0 +1,29 @@
+{
+  "name": "koa-ts-yt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev",
+    "tsc": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "koa": "^2.12.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/colors": "^1.2.1",
+    "@types/koa": "^2.11.3",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-router": "^7.4.1",
+    "@types/node": "^14.0.13",
+    "ts-node-dev": "^1.0.0-pre.48",
+    "typescript": "^3.9.5"
+  }
+}
