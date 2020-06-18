@@ -7,8 +7,10 @@ config()
 const { DB_HOST, DB_USER, DB_PASS } = process.env
 console.log({ DB_HOST, DB_USER, DB_PASS })
 
-export const connectWithDB = async (app: Koa<DefaultState, DefaultContext>) => {
-  const connection = await createConnection({
+export const connectWithDB = async (
+  app: Koa<DefaultState, DefaultContext>
+): Promise<void> => {
+  const connection: Connection = await createConnection({
     type: 'sqlite',
     database: './koa.db',
   })
