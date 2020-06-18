@@ -2,6 +2,9 @@ import * as Koa from 'koa'
 import { DefaultState, DefaultContext } from 'koa'
 import { createConnection, Connection } from 'typeorm'
 import { config } from 'dotenv'
+import { PostsEntity } from './posts.entity'
+import { UsersEntity } from './users.entity'
+import 'reflect-metadata'
 import 'colors'
 config()
 const { DB_HOST, DB_USER, DB_PASS } = process.env
@@ -13,6 +16,7 @@ export const connectWithDB = async (
   const connection: Connection = await createConnection({
     type: 'sqlite',
     database: './koa.db',
+    entities: [PostsEntity, UsersEntity],
   })
   await connection
     .synchronize(true) // pass true to drop everything and create them again
