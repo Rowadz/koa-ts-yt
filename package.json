@@ -12,10 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
     "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
     "koa": "^2.12.1",
     "koa-bodyparser": "^4.3.0",
-    "koa-router": "^9.0.1"
+    "koa-router": "^9.0.1",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.2.0",
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/colors": "^1.2.1",
