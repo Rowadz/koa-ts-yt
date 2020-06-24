@@ -1,7 +1,11 @@
-import { Repository } from 'typeorm'
+import { Repository, DeepPartial } from 'typeorm'
 
 export class BaseService<T> {
-  repo: Repository<T>
+  readonly repo: Repository<T>
+
+  constructor(repo: Repository<T>) {
+    this.repo = repo
+  }
 
   async getDate(): Promise<Array<T>> {
     return await this.repo.find()
@@ -11,5 +15,12 @@ export class BaseService<T> {
     return await this.repo.findOne(id)
   }
 
-  async update(id: number, body: Partial<T>) {}
+  async update(id: number, body: DeepPartial<T>) {
+    return await this.repo.update(id, body)
+  }
+
+  async del(id: number): Promise<T> {
+    await this.repo.delete(id)
+    return await this.getById(id)
+  }
 }

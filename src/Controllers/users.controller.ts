@@ -14,9 +14,7 @@ import { UsersService } from '../services'
 
 @Controller('/users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {
-    console.log(usersService)
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   getAll(@Ctx() ctx: CTX) {
