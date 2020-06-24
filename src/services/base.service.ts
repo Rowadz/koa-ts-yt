@@ -15,8 +15,9 @@ export class BaseService<T> {
     return await this.repo.findOne(id)
   }
 
-  async update(id: number, body: DeepPartial<T>) {
-    return await this.repo.update(id, body)
+  async update(id: number, body: DeepPartial<T>): Promise<T> {
+    await this.repo.update(id, body)
+    return this.getById(id)
   }
 
   async del(id: number): Promise<T> {
