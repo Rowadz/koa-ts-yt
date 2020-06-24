@@ -1,8 +1,10 @@
 import * as Koa from 'koa'
-import { DefaultState, DefaultContext, ParameterizedContext } from 'koa'
-import { createKoaServer } from 'routing-controllers'
+import { DefaultState, DefaultContext } from 'koa'
+import { createKoaServer, useContainer } from 'routing-controllers'
 import { connectWithDB } from './entities'
 import { UsersController } from './Controllers'
+import { Container } from 'typedi'
+import { services, UsersService } from './services'
 import 'colors'
 const port = 3000
 
@@ -11,6 +13,10 @@ const startApp = async () => {
     controllers: [UsersController],
   })
   await connectWithDB(app)
+  services.forEach((service) => {
+    Container.set(service, new service(app.context.db))
+  })
+  useContainer(Container)
 
   app
     .listen(port)

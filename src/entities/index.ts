@@ -22,5 +22,6 @@ export const connectWithDB = async (
     .synchronize(true) // pass true to drop everything and create them again
     .then(() => console.log('synchronized! with DB'.green.bold))
     .catch(() => console.error('Faild to sync with DB'.red.bold))
+
   app.context.db = connection
 }

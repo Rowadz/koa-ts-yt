@@ -6,13 +6,21 @@ import {
   Post,
   Delete,
   Patch,
+  Ctx,
 } from 'routing-controllers'
+import { CTX } from '../interfaces'
+import { UsersEntity } from '../entities/users.entity'
+import { UsersService } from '../services'
 
 @Controller('/users')
 export class UsersController {
+  constructor(private readonly usersService: UsersService) {
+    console.log(usersService)
+  }
+
   @Get()
-  getAll() {
-    return 'This action returns all users'
+  getAll(@Ctx() ctx: CTX) {
+    return ctx.db.getRepository(UsersEntity).find()
   }
 
   @Get('/:id')

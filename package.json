@@ -23,6 +23,7 @@
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0-alpha.4",
     "sqlite3": "^4.2.0",
+    "typedi": "^0.8.0",
     "typeorm": "^0.2.25"
   },
   "devDependencies": {
