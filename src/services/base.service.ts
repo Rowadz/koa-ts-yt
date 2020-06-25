@@ -7,7 +7,7 @@ export class BaseService<T> {
     this.repo = repo
   }
 
-  async getDate(): Promise<Array<T>> {
+  async getData(): Promise<Array<T>> {
     return await this.repo.find()
   }
 
