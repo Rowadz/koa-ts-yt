@@ -21,7 +21,8 @@ export class BaseService<T> {
   }
 
   async del(id: number): Promise<T> {
+    const entity = await this.getById(id)
     await this.repo.delete(id)
-    return await this.getById(id)
+    return entity
   }
 }
