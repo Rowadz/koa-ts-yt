@@ -1,6 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { SharedProp } from './sharedProp.entity'
 import { PostsEntity } from './posts.entity'
+import { Exclude } from 'class-transformer'
 
 export type UserType = 'admin' | 'user'
 
@@ -25,9 +26,11 @@ export class UsersEntity extends SharedProp {
   type: UserType
 
   @Column({ nullable: false })
+  @Exclude()
   password: string
 
   @Column({ nullable: false })
+  @Exclude()
   salt: string
 
   @OneToMany(() => PostsEntity, (post: PostsEntity) => post.user, {

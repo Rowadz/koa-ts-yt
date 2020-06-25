@@ -11,6 +11,7 @@ import {
 import { CTX } from '../interfaces'
 import { UsersService } from '../services'
 import { UsersEntity } from '../entities/users.entity'
+import { genSalt, hash } from 'bcrypt'
 
 @Controller('/users')
 export class UsersController {
@@ -28,9 +29,9 @@ export class UsersController {
   }
 
   @Post()
-  post(@Body() user: Partial<UsersEntity>) {
-    // TODO salt
-    user.salt = ''
+  async post(@Body() user: Partial<UsersEntity>) {
+    user.salt = await genSalt()
+    user.password = await hash(user.password, user.salt)
     return this.usersService.create(user)
   }
 

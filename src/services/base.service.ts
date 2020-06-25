@@ -2,7 +2,7 @@ import { Repository, DeepPartial } from 'typeorm'
 import { UsersEntity } from '../entities/users.entity'
 
 export class BaseService<T> {
-  readonly repo: Repository<T>
+  public readonly repo: Repository<T>
 
   constructor(repo: Repository<T>) {
     this.repo = repo
