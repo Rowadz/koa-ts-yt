@@ -1,4 +1,5 @@
 import { Repository, DeepPartial } from 'typeorm'
+import { UsersEntity } from '../entities/users.entity'
 
 export class BaseService<T> {
   readonly repo: Repository<T>
@@ -12,7 +13,12 @@ export class BaseService<T> {
   }
 
   async getById(id: number): Promise<T> {
-    return await this.repo.findOne(id)
+    return await this.repo.findOneOrFail(id)
+  }
+
+  async create(data: DeepPartial<T>): Promise<T> {
+    const entity: DeepPartial<T> = this.repo.create(data)
+    return await this.repo.save(entity)
   }
 
   async update(id: number, body: DeepPartial<T>): Promise<T> {

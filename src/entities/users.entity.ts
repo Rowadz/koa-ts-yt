@@ -6,24 +6,6 @@ export type UserType = 'admin' | 'user'
 
 @Entity({ name: 'users' })
 export class UsersEntity extends SharedProp {
-  constructor(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    salt: string,
-    birthOfDate?: Date,
-    type?: UserType
-  ) {
-    super()
-    this.firstName = firstName
-    this.lastName = lastName
-    this.birthOfDate = birthOfDate
-    this.email = email
-    this.type = type
-    this.password = password
-    this.salt = salt
-  }
   @PrimaryGeneratedColumn()
   id: number
 

@@ -9,8 +9,8 @@ import {
   Ctx,
 } from 'routing-controllers'
 import { CTX } from '../interfaces'
-import { UsersEntity } from '../entities/users.entity'
 import { UsersService } from '../services'
+import { UsersEntity } from '../entities/users.entity'
 
 @Controller('/users')
 export class UsersController {
@@ -18,33 +18,29 @@ export class UsersController {
 
   @Get()
   getAll(@Ctx() ctx: CTX) {
-    return ctx.db.getRepository(UsersEntity).find()
+    // ctx.db.getRepository(UsersEntity).find()
+    return this.usersService.getData()
   }
 
   @Get('/:id')
   getOne(@Param('id') id: number) {
-    return `This action returns user ${id}`
+    return this.usersService.getById(id)
   }
 
   @Post()
-  post(@Body() user: any) {
-    return {
-      saved: true,
-      user,
-    }
+  post(@Body() user: Partial<UsersEntity>) {
+    // TODO salt
+    user.salt = ''
+    return this.usersService.create(user)
   }
 
   @Patch('/:id')
   put(@Param('id') id: number, @Body() user: any) {
-    return {
-      update: true,
-      user,
-      id,
-    }
+    return this.usersService.update(id, user)
   }
 
   @Delete('/:id')
   remove(@Param('id') id: number) {
-    return `Removing user... ${id}`
+    return this.usersService.del(id)
   }
 }
