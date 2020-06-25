@@ -4,7 +4,7 @@ import { createKoaServer, useContainer } from 'routing-controllers'
 import { connectWithDB } from './entities'
 import { UsersController } from './Controllers'
 import { Container } from 'typedi'
-import { services, UsersService } from './services'
+import { services } from './services'
 import 'colors'
 const port = 3000
 
