@@ -35,7 +35,7 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  put(@Param('id') id: number, @Body() user: any) {
+  patch(@Param('id') id: number, @Body() user: Partial<UsersEntity>) {
     return this.usersService.update(id, user)
   }
 
