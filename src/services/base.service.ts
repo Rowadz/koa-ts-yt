@@ -16,9 +16,17 @@ export class BaseService<T> {
     return await this.repo.findOneOrFail(id)
   }
 
-  async create(data: DeepPartial<T>): Promise<T> {
-    const entity: DeepPartial<T> = this.repo.create(data)
+  async create(
+    data: DeepPartial<T>,
+    entityAlreadyCreated?: DeepPartial<T>
+  ): Promise<T> {
+    const entity: DeepPartial<T> =
+      entityAlreadyCreated || this.getInstance(data)
     return await this.repo.save(entity)
+  }
+
+  getInstance(data: DeepPartial<T>): DeepPartial<T> {
+    return this.repo.create(data)
   }
 
   async update(id: number, body: DeepPartial<T>): Promise<T> {
