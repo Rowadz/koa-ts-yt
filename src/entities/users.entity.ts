@@ -11,6 +11,7 @@ import {
   IsEmpty,
   IsDateString,
 } from 'class-validator'
+import { IsDateStringCustom } from './customValidators'
 
 export type UserType = 'admin' | 'user'
 
@@ -35,7 +36,7 @@ export class UsersEntity extends SharedProp {
   lastName: string
 
   @Column({ name: 'birth_of_date', nullable: true, type: 'date' })
-  @IsDateString()
+  @IsDateStringCustom()
   birthOfDate: Date
 
   @Column({ unique: true, nullable: false })
