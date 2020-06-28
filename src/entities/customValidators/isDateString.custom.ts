@@ -17,15 +17,13 @@ class IsDateStringConstraints implements ValidatorConstraintInterface {
     // would be NaN when failing and that is falsy else a number(timestamp)
     return (
       this.val(textThatShouldBeDate, 'MM/DD/YYYY') ||
-      this.val(textThatShouldBeDate, 'DD/MM/YYYY') ||
-      this.val(textThatShouldBeDate, 'DD-MM-YYYY') ||
-      this.val(textThatShouldBeDate, 'MM-DD-YYYY')
+      this.val(textThatShouldBeDate, 'DD/MM/YYYY')
     )
   }
 
   defaultMessage(args: ValidationArguments): string {
-    const { targetName } = args
-    return `${targetName} should be in format DD/MM/YYYY or DD-MM-YYYY`
+    const { property } = args
+    return `${property} should be in format DD/MM/YYYY or DD-MM-YYYY`
   }
 }
 
