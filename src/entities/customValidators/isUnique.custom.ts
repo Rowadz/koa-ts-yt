@@ -8,7 +8,6 @@ import { BaseService } from '../../services/base.service'
 
 export function IsUniqueCustom(
   validationOptions?: ValidationOptions,
-  colName?: string,
   service?: Function
 ) {
   return (object: object, propertyName: string) => {
@@ -21,7 +20,7 @@ export function IsUniqueCustom(
         async validate(toBeUnique: string, args: ValidationArguments) {
           const ser = Container.get(service) as BaseService<any>
           try {
-            await ser.getById(null, { [colName]: toBeUnique })
+            await ser.getById(null, { [args.property]: toBeUnique })
           } catch {
             return true
           }
