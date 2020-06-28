@@ -11,7 +11,6 @@ export function IsUniqueCustom(
   colName?: string,
   service?: Function
 ) {
-  console.log(validationOptions, colName, service)
   return (object: object, propertyName: string) => {
     // object -> will be the class you are using this decrator in
     registerDecorator({
@@ -19,10 +18,10 @@ export function IsUniqueCustom(
       propertyName, // the name of the prop this decrator have been place on top of it
       options: validationOptions,
       validator: {
-        async validate(email: string, args: ValidationArguments) {
+        async validate(toBeUnique: string, args: ValidationArguments) {
           const ser = Container.get(service) as BaseService<any>
           try {
-            await ser.getById(null, { email })
+            await ser.getById(null, { [colName]: toBeUnique })
           } catch {
             return true
           }
