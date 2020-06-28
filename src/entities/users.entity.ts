@@ -11,7 +11,8 @@ import {
   IsEmpty,
   IsDateString,
 } from 'class-validator'
-import { IsDateStringCustom } from './customValidators'
+import { IsDateStringCustom, IsUniqueCustom } from './customValidators'
+import { UsersService } from '../services'
 
 export type UserType = 'admin' | 'user'
 
@@ -42,6 +43,7 @@ export class UsersEntity extends SharedProp {
   @Column({ unique: true, nullable: false })
   @IsEmail()
   @IsDefined()
+  @IsUniqueCustom(null, 'email', UsersService)
   email: string
 
   @Column({ default: 'user' })

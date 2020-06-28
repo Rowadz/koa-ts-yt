@@ -29,7 +29,6 @@ class IsDateStringConstraints implements ValidatorConstraintInterface {
 
 export function IsDateStringCustom(validationOptions?: ValidationOptions) {
   return (object: object, propertyName: string) => {
-    // object -> will be the class you are using this decrator in
     registerDecorator({
       target: object.constructor,
       propertyName, // the name of the prop this decrator have been place on top of it

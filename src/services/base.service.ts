@@ -1,4 +1,4 @@
-import { Repository, DeepPartial } from 'typeorm'
+import { Repository, DeepPartial, ObjectLiteral } from 'typeorm'
 import { UsersEntity } from '../entities/users.entity'
 
 export class BaseService<T> {
@@ -12,8 +12,12 @@ export class BaseService<T> {
     return await this.repo.find()
   }
 
-  async getById(id: number): Promise<T> {
-    return await this.repo.findOneOrFail(id)
+  async getById(id: number, where?: ObjectLiteral): Promise<T> {
+    if (where) {
+      return await this.repo.findOneOrFail(id, { where })
+    } else {
+      return await this.repo.findOneOrFail(id)
+    }
   }
 
   async create(
