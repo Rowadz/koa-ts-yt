@@ -10,8 +10,14 @@ import {
   IsEmail,
   IsEmpty,
   IsDateString,
+  IsOptional,
 } from 'class-validator'
-import { IsDateStringCustom, IsUniqueCustom } from './customValidators'
+import {
+  IsDateStringCustom,
+  IsUniqueCustom,
+  CREATE,
+  UPDATE,
+} from './customValidators'
 import { UsersService } from '../services'
 
 export type UserType = 'admin' | 'user'
@@ -23,10 +29,11 @@ export class UsersEntity extends SharedProp {
   id: number
 
   @Column({ name: 'first_name', nullable: false })
-  @IsDefined()
+  @IsDefined({ groups: [CREATE] })
   @IsString()
   @MinLength(1)
   @MaxLength(255)
+  @IsOptional({ groups: [UPDATE] })
   firstName: string
 
   @Column({ name: 'last_name', nullable: false })
@@ -34,16 +41,19 @@ export class UsersEntity extends SharedProp {
   @IsString()
   @MinLength(1)
   @MaxLength(255)
+  @IsOptional({ groups: [UPDATE] })
   lastName: string
 
   @Column({ name: 'birth_of_date', nullable: true, type: 'date' })
   @IsDateStringCustom()
+  @IsOptional({ groups: [UPDATE] })
   birthOfDate: Date
 
   @Column({ unique: true, nullable: false })
   @IsEmail()
   @IsDefined()
   @IsUniqueCustom(UsersService)
+  @IsOptional({ groups: [UPDATE] })
   email: string
 
   @Column({ default: 'user' })
@@ -56,6 +66,7 @@ export class UsersEntity extends SharedProp {
   @IsDefined()
   @MinLength(6)
   @MaxLength(25)
+  @IsOptional({ groups: [UPDATE] })
   password: string
 
   @Column({ nullable: false })

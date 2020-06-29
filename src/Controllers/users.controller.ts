@@ -15,6 +15,7 @@ import { UsersEntity } from '../entities/users.entity'
 import { genSalt, hash } from 'bcrypt'
 import { validate, ValidationError } from 'class-validator'
 import { DeepPartial } from 'typeorm'
+import { CREATE, UPDATE } from '../entities/customValidators'
 
 @JsonController('/users')
 export class UsersController {
@@ -36,7 +37,9 @@ export class UsersController {
     const instance: DeepPartial<UsersEntity> = this.usersService.getInstance(
       user
     )
-    const validationRes: Array<ValidationError> = await validate(instance)
+    const validationRes: Array<ValidationError> = await validate(instance, {
+      groups: [CREATE],
+    })
     if (validationRes.length > 0) throw validationRes
     instance.salt = await genSalt()
     instance.password = await hash(user.password, instance.salt)
@@ -44,7 +47,12 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  patch(@Param('id') id: number, @Body() user: Partial<UsersEntity>) {
+  async patch(@Param('id') id: number, @Body() user: Partial<UsersEntity>) {
+    const instance: DeepPartial<UsersEntity> = this.usersService.getInstance(
+      user
+    )
+    const validationRes: Array<ValidationError> = await validate(instance)
+    if (validationRes.length > 0) throw validationRes
     return this.usersService.update(id, user)
   }
 
