@@ -37,7 +37,7 @@ export class UsersEntity extends SharedProp {
   firstName: string
 
   @Column({ name: 'last_name', nullable: false })
-  @IsDefined()
+  @IsDefined({ groups: [CREATE] })
   @IsString()
   @MinLength(1)
   @MaxLength(255)
@@ -51,7 +51,7 @@ export class UsersEntity extends SharedProp {
 
   @Column({ unique: true, nullable: false })
   @IsEmail()
-  @IsDefined()
+  @IsDefined({ groups: [CREATE] })
   @IsUniqueCustom(UsersService)
   @IsOptional({ groups: [UPDATE] })
   email: string
@@ -63,7 +63,7 @@ export class UsersEntity extends SharedProp {
   @Column({ nullable: false })
   @Exclude()
   @IsString()
-  @IsDefined()
+  @IsDefined({ groups: [CREATE] })
   @MinLength(6)
   @MaxLength(25)
   @IsOptional({ groups: [UPDATE] })
