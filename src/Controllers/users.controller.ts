@@ -51,7 +51,9 @@ export class UsersController {
     const instance: DeepPartial<UsersEntity> = this.usersService.getInstance(
       user
     )
-    const validationRes: Array<ValidationError> = await validate(instance)
+    const validationRes: Array<ValidationError> = await validate(instance, {
+      groups: [UPDATE],
+    })
     if (validationRes.length > 0) throw validationRes
     return this.usersService.update(id, user)
   }

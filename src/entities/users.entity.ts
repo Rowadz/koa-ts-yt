@@ -30,30 +30,29 @@ export class UsersEntity extends SharedProp {
 
   @Column({ name: 'first_name', nullable: false })
   @IsDefined({ groups: [CREATE] })
-  @IsString()
-  @MinLength(1)
-  @MaxLength(255)
   @IsOptional({ groups: [UPDATE] })
+  @IsString({ always: true })
+  @MinLength(1, { always: true })
+  @MaxLength(255, { always: true })
   firstName: string
 
   @Column({ name: 'last_name', nullable: false })
   @IsDefined({ groups: [CREATE] })
-  @IsString()
-  @MinLength(1)
-  @MaxLength(255)
   @IsOptional({ groups: [UPDATE] })
+  @IsString({ always: true })
+  @MinLength(1, { always: true })
+  @MaxLength(255, { always: true })
   lastName: string
 
   @Column({ name: 'birth_of_date', nullable: true, type: 'date' })
-  @IsDateStringCustom()
-  @IsOptional({ groups: [UPDATE] })
+  @IsDateStringCustom({ always: true })
   birthOfDate: Date
 
   @Column({ unique: true, nullable: false })
-  @IsEmail()
+  @IsEmail({}, { always: true })
   @IsDefined({ groups: [CREATE] })
-  @IsUniqueCustom(UsersService)
   @IsOptional({ groups: [UPDATE] })
+  @IsUniqueCustom(UsersService, { always: true })
   email: string
 
   @Column({ default: 'user' })
@@ -62,11 +61,11 @@ export class UsersEntity extends SharedProp {
 
   @Column({ nullable: false })
   @Exclude()
-  @IsString()
+  @IsString({ always: true })
   @IsDefined({ groups: [CREATE] })
-  @MinLength(6)
-  @MaxLength(25)
   @IsOptional({ groups: [UPDATE] })
+  @MinLength(6, { always: true })
+  @MaxLength(25, { always: true })
   password: string
 
   @Column({ nullable: false })

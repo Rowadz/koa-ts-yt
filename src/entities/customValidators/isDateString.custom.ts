@@ -17,7 +17,8 @@ class IsDateStringConstraints implements ValidatorConstraintInterface {
     // would be NaN when failing and that is falsy else a number(timestamp)
     return (
       this.val(textThatShouldBeDate, 'MM/DD/YYYY') ||
-      this.val(textThatShouldBeDate, 'DD/MM/YYYY')
+      this.val(textThatShouldBeDate, 'DD/MM/YYYY') ||
+      textThatShouldBeDate === null
     )
   }
 
