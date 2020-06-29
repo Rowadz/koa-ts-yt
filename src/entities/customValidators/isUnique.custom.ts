@@ -7,8 +7,8 @@ import Container from 'typedi'
 import { BaseService } from '../../services/base.service'
 
 export function IsUniqueCustom(
-  validationOptions?: ValidationOptions,
-  service?: Function
+  service: Function,
+  validationOptions?: ValidationOptions
 ) {
   return (object: object, propertyName: string) => {
     // object -> will be the class you are using this decrator in

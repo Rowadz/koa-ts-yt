@@ -43,7 +43,7 @@ export class UsersEntity extends SharedProp {
   @Column({ unique: true, nullable: false })
   @IsEmail()
   @IsDefined()
-  @IsUniqueCustom(null, UsersService)
+  @IsUniqueCustom(UsersService)
   email: string
 
   @Column({ default: 'user' })
