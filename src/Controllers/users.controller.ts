@@ -60,7 +60,7 @@ export class UsersController {
         delete user.salt
         const jwt = sign(JSON.parse(JSON.stringify(user)), JWT_SECRET)
         return { ...user, accessToken: jwt }
-      }
+      } else throw Error()
     } catch {
       throw new UnauthorizedError('user not found')
     }
