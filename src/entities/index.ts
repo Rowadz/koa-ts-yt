@@ -19,7 +19,7 @@ export const connectWithDB = async (
     entities: [PostsEntity, UsersEntity],
   })
   await connection
-    .synchronize(true) // pass true to drop everything and create them again
+    .synchronize(false) // pass true to drop everything and create them again
     .then(() => console.log('synchronized! with DB'.green.bold))
     .catch(() => console.error('Faild to sync with DB'.red.bold))
 
