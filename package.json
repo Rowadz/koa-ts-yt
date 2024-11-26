@@ -16,7 +16,7 @@
     "@types/moment": "^2.13.0",
     "bcrypt": "^4.0.1",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.9.1",
+    "class-validator": "^0.14.0",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
